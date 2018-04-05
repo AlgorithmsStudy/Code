@@ -1,29 +1,12 @@
 
+const DoubleNode = require('./nodes').DoubleNode;
 
-class DoubleNode {
-  constructor(v, n, p) {
-    this.value = v;
-    this.next = n;
-    this.prev = p
-  }
-}
-
-// Abstract Data Type:
-// Deque (Doubly ended queue)
-// Four operations:
-// enqueueFront  -- put an element in the front
-// dequeueFront -- take an element off the front
-// enqueueBack 
-// dequeueBack
-
+// Deque: Doubly ended queue.
 // If you only ever use enqueueFront and dequeueFront, you essentially have a stack.
 // If you only use enqueueBack and dequeueFront, you have queue.
-
 // With a singly linked list, you can only traverse in one direction. With a doubly linked
 // list you can traverse in both directions.
-
-
-class Deque {
+module.exports = class Deque {
   constructor() {
     this.front = null;
     this.back = null;
@@ -63,8 +46,32 @@ class Deque {
     }
     return v
   }
+
+  dequeueBack() {
+    let v = this.back.value
+    if (this.back.prev == null) {
+      this.back = null
+      this.front = null
+    } else {
+      this.back = this.back.prev 
+      this.back.next = null
+    }
+    return v
+  }
+
+  enqueueBack(v) {
+    if (this.back == null) {
+      this.back = new DoubleNode(v, null, null)
+      this.front = this.back
+    } else {
+      this.back = new Node(v, null, this.back)
+      this.back.prev.next = this.back
+    }
+  }
+
 }
 
+// Misc pictures:
 
 // front -> [3]  <- back
 //    next  [.] 
@@ -81,10 +88,3 @@ class Deque {
 //          [4] f> [3]    [7]    [11]  <- back
 //    next  [ ] -> [ ] -> [ ] -> [ .]
 //    prev  [.]    [.] <- [ ] <- [  ]
-
-let d = new Deque()
-d.enqueueFront(1)
-d.enqueueFront(2)
-console.log(d)
-console.log(d.dequeueFront())
-console.log(d.dequeueFront())
