@@ -1,0 +1,137 @@
+
+const TreeNode = require('./nodes').TreeNode;
+const Queue = require('./queue').Queue;
+
+// Outputs the values of the tree given by "root"
+// in preorder into the array "out".
+exports.preorder = function preorder(root, out) {
+  if (root == null) {
+    return;
+  }
+  out.push(root.value);
+  preorder(root.left, out);
+  preorder(root.right, out);
+}
+root->c
+  /  \
+ a    d
+/ \  /  \ 
+b  e f  g
+
+out = [c,a,b,e,d,f,g]
+
+//preorder(root, out)
+  //preorder(root.left, out)
+    //preorder(root.left.left, out)
+      //preorder(root.left.left.left, out)
+      //preorder(root.left.left.right, out)
+    //preorder(root.left.right, out)
+      //preorder(root.left.right.left, out)
+      //preorder(root.left.right.right, out)
+  //preorder(root.right, out)
+    //preorder(root.right.left, out)
+      //preorder(root.right.left.left, out)
+      //preorder(root.right.left.right, out)
+    //preorder(root.right.right, out)
+      //preorder(root.right.right.left, out)
+      //preorder(root.right.right.right, out)
+
+
+preorder(root, out)
+  //preorder(root.left, out)
+    //preorder(root.left.left, out)
+      //preorder(root.left.left.left, out)
+      //preorder(root.left.left.right, out)
+    //preorder(root.left.right, out)
+      //preorder(root.left.right.left, out)
+      //preorder(root.left.right.right, out)
+  preorder(root.right, out)
+    //preorder(root.right.left, out)
+      //preorder(root.right.left.left, out)
+      //preorder(root.right.left.right, out)
+    preorder(root.right.right, out)
+
+The fullest binary tree with
+height 1 has 1 vertex
+height 2 has 3 vertices
+height 3 has 7 vertices
+height 4 has 15 vertices
+height 5 has 31 vertices
+height h has 2^h -1
+
+2,4,8,16,32,64
+2^1, 2^2, 2^3, 2^4, 2^5, 2^6
+
+2^8 = 256
+A byte is 8 bits. That is a byte is 8 zero or ones. A byte has 256 different values.
+A byte can contain the numbers 0 to 255 or -128 to 127.
+A javascript color is represented in 6 hex characters. #FFFFFF.
+Each hex character can takes 16 different values -- from 0..9abcdef. Each hex value takes ?? bits
+Four (4) bits is enough to store 16 values. Each hex digit from 0..f can be stored in 4 bits.
+How many hex digits specify a byte? Two! Hex digit ____. Hex digit ____. A byte ____ ____.
+How many bytes are needed to store a color? How many bits? How many bytes? 3 bytes.
+One byte for red, one byte for blue, and one byte for green.
+
+An integer in some systems is an "int32" i.e., 32 bits, 4 bytes. It store values from 0 ... 2^(32) -1 ~ 2 billion.
+An integer in some systems is an "int64" i.e., 64 bits, 8 bytes. It store values from 0 ... 2^(64) -1 ~ big. 4 billion billion.
+
+exports.postorder = function postorder(root, out) {
+  if (root == null) {
+    return;
+  }
+  postorder(root.left, out);
+  postorder(root.right, out);
+  out.push(root.value);
+}
+
+exports.inorder = function inorder(root, out) {
+  if (root == null) {
+    return;
+  }
+  inorder(root.left, out);
+  out.push(root.value);
+  inorder(root.right, out);
+}
+
+exports.levelorder = function levelorder(root, out) {
+   let q = new Queue();
+   q.enqueue(root);
+   while (! q.isEmpty()) {
+      let t = q.dequeue();
+      if (t != null) {
+        out.push(t.value);
+        q.enqueue(t.left);
+        q.enqueue(t.right);
+      }
+   }
+}
+
+root->c
+  /  \
+ a    d
+/ \  /  \ 
+b  e f  g
+
+out = [c,a,d]
+q = [b,e,f,g]
+t = ()
+
+// Homework. Implement traversals without recursion.
+// Instead use an explicit stack
+function preorderNoRecursion(root, out) {
+  // ... 
+}
+
+function postorderNoRecursion(root, out) {
+  // ... 
+}
+
+function inorderNoRecursion(root, out) {
+  // ... 
+}
+
+// Homework. Construct a tree from two traversals.
+function makeTree(preorder, inorder) {
+  // ...
+}
+
