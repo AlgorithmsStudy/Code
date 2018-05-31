@@ -1,0 +1,76 @@
+
+const FixedArray = require('./array').FixedArray;
+
+// What's a map aka dictionary aka table?
+// A map is an ADT.
+// It has the following operations:
+// put(key, value) // Stores a key value pair. Overwrites the previous value if present.
+// get(key) // returns the value for the given key.
+// contains(key) // returns true if the key is in the map.
+
+let a = {}
+
+for(let key in a){
+  console.log(key)
+}
+
+
+a.put(1,8)
+console.log(a.get(1)) // outputs 8
+
+a.put(1,7)
+[{key:1, value:7}]
+a.put(2,3)
+[{key:1, value:7},{key:2, value:3}]
+a.put(1,8)
+[{key:1, value:8},{key:2, value:3}]
+s*
+put(key, value) {
+  if (this.contains(key)) {
+    // crap, replace it.
+  } else {
+    this.arr.push({key: key, value: value});
+  }
+}
+
+get(key) {
+  for (int i = 0; i < this.arr.length(); i++) {
+    if (this.arr[i].key == key) {
+      return this.arr[i].value;
+    }
+  }
+  return null;
+}
+
+contains(key) {
+  for (int i = 0; i < this.arr.length(); i++) {
+    if (this.arr[i].key == key) {
+      return true;
+    }
+  }
+  return false;
+}
+*/
+
+func hashString(s) {
+  let hash = 0;
+  for (int i = 0; i < s.length; i++) {
+    hash = hash * 31;
+    hash = hash + s[i]
+  }
+  return hash
+}
+
+class Foo {
+  int bar;
+  string faa;
+  constructor() {
+    this.bar = "23232";
+    this.faa = "asads"
+  }
+
+  methods() {
+    this.woo = "asdas"; // error what's woo?
+  }
+
+}
